@@ -83,11 +83,8 @@ runner.run()
 #### 备注：
 
 - ##### 开发者：柠檬班—木森
-
 - ##### 开发时间：2020-07-16
-
 - ##### E-mail:musen_nmb@qq.com
-- ##### github地址:https://github.com/musen123/UnitTestReport
 - ##### 本模块目前是第一个版本，后续还会优化改进，欢迎各位大佬提BUG！
 
 
