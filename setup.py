@@ -20,7 +20,7 @@ setup(
     url='https://github.com/musen123/UnitTestReport',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    install_requires=["Jinja2==2.10.1"],
+    install_requires=["Jinja2==2.11.3"],
     packages=find_packages(),
     package_data={
         "": ["*.html"],
