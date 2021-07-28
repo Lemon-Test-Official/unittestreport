@@ -104,16 +104,22 @@
             text-align: left;
         }
 
-        .test_log td  {
+        .test_log td {
             text-align: left;
             height: 30px;
             margin: 0;
             padding-left: 3em;
+            padding-right:3em;
             font: none 18px/24px "Microsoft YaHei UI";
             color: #9e141a;
         }
-        pre{
+
+        pre {
             margin: 0;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
         }
 
         /*    测试图表显示*/
@@ -132,7 +138,7 @@
 
 <!--报告标题-->
 <div class="title text-success">
-    <div class="shadow-lg p-3 mb-5 bg-white rounded">{{title}}</div>
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">{{ title }}</div>
 </div>
 
 <!--汇总信息-->
@@ -142,19 +148,19 @@
         <ul class="list-group">
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">测试人员</button>
-                <span class="text-dark">{{tester}}</span>
+                <span class="text-dark">{{ tester }}</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">开始时间</button>
-                <span class="text-dark">{{begin_time}}</span>
+                <span class="text-dark">{{ begin_time }}</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">执行时间</button>
-                <span class="text-dark">{{runtime}}</span>
+                <span class="text-dark">{{ runtime }}</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">用例总数</button>
-                <span class="text-dark">{{all}}</span>
+                <span class="text-dark">{{ all }}</span>
             </li>
 
 
@@ -165,19 +171,19 @@
 
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">成功用例</button>
-                <span class="text-success">{{success}}</span>
+                <span class="text-success">{{ success }}</span>
             </li>
             <li class="list-group-item">
-                <button type="button" class="btn btn-danger">失败用例</button>
-                <span class="text-danger">{{fail}}</span>
+                <button type="button" class="btn btn-warning">失败用例</button>
+                <span class="text-warning">{{ fail }}</span>
             </li>
             <li class="list-group-item">
-                <button type="button" class="btn btn-warning">错误用例</button>
-                <span class="text-warning">{{error}}</span>
+                <button type="button" class="btn btn-danger">错误用例</button>
+                <span class="text-danger">{{ error }}</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-secondary">跳过用例</button>
-                <span class="text-secondary">{{skip}}</span>
+                <span class="text-secondary">{{ skip }}</span>
             </li>
         </ul>
     </div>
@@ -185,7 +191,7 @@
         <ul class="list-group">
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">描述信息</button>
-                <span class="text-secondary">{{desc}}</span>
+                <span class="text-secondary">{{ desc }}</span>
             </li>
         </ul>
     </div>
@@ -215,7 +221,7 @@
                     <select id="testClass">
                         <option>所有</option>
                         {% for foo in testClass %}
-                        <option>{{foo}}</option>
+                            <option>{{ foo }}</option>
                         {% endfor %}
                     </select>
 
@@ -230,8 +236,8 @@
                     <select id="testResult">
                         <option>所有</option>
                         <option class="text-success">成功</option>
-                        <option class="text-danger">失败</option>
-                        <option class="text-warning">错误</option>
+                        <option class="text-warning">失败</option>
+                        <option class="text-danger">错误</option>
                         <option class="text-info">跳过</option>
                     </select>
 
@@ -241,38 +247,38 @@
             </thead>
             <tbody>
             {% for foo in results %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td class="{{foo.class_name }}">{{foo.class_name }}</td>
-                <td>{{foo.method_name }}</td>
-                <td>{{foo.method_doc}}</td>
-                <td>{{foo.run_time}}</td>
-                {% if foo.state == '成功' %}
-                <td class="text-success">{{foo.state}}</td>
-                {% elif foo.state == '失败' %}
-                <td class="text-danger">{{foo.state}}</td>
-                {% elif foo.state == '错误' %}
-                <td class="text-warning">{{foo.state}}</td>
-                {% else %}
-                <td class="text-info">{{foo.state}}</td>
-                {% endif %}
-                <td>
-                    <button type="button" class="btn btn-success btn_info">查看详情</button>
-                </td>
-            </tr>
-
-            <tr class="test_log">
-
-                <td colspan="7">
-                    {% for item in foo.run_info %}
-
-                    <pre>{{item}}</pre>
-                    {% endfor %}
-                    {% if foo.run_info == [] %}
-                    <pre>无内容输出！</pre>
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td class="{{ foo.class_name }}">{{ foo.class_name }}</td>
+                    <td>{{ foo.method_name }}</td>
+                    <td>{{ foo.method_doc }}</td>
+                    <td>{{ foo.run_time }}</td>
+                    {% if foo.state == '成功' %}
+                        <td class="text-success">{{ foo.state }}</td>
+                    {% elif foo.state == '失败' %}
+                        <td class="text-warning">{{ foo.state }}</td>
+                    {% elif foo.state == '错误' %}
+                        <td class="text-danger">{{ foo.state }}</td>
+                    {% else %}
+                        <td class="text-info">{{ foo.state }}</td>
                     {% endif %}
-                </td>
-            </tr>
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        {% for item in foo.run_info %}
+
+                            <pre>{{ item }}</pre>
+                        {% endfor %}
+                        {% if foo.run_info == [] %}
+                            <pre>无内容输出！</pre>
+                        {% endif %}
+                    </td>
+                </tr>
             {% endfor %}
 
             </tbody>
@@ -285,7 +291,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
 <script>
     var tbodyTr = $('tbody tr');
@@ -321,11 +327,11 @@
 
             } else if (res === '失败') {
                 tbodyTr.hide();
-                tbodyTr.has('button').has('.text-danger').show()
+                tbodyTr.has('button').has('.text-warning').show()
 
             } else if (res === '错误') {
                 tbodyTr.hide();
-                tbodyTr.has('button').has('.text-warning').show()
+                tbodyTr.has('button').has('.text-danger').show()
 
             } else if (res === '跳过') {
                 tbodyTr.hide();
@@ -340,10 +346,10 @@
                 tbodyTr.has('button').has('.' + cls + '').has('.text-success').show()
             } else if (res === '失败') {
                 tbodyTr.hide();
-                tbodyTr.has('button').has('.' + cls + '').has('.text-danger').show()
+                tbodyTr.has('button').has('.' + cls + '').has('.text-warning').show()
             } else if (res === '错误') {
                 tbodyTr.hide();
-                tbodyTr.has('button').has('.' + cls + '').has('.text-warning').show()
+                tbodyTr.has('button').has('.' + cls + '').has('.text-danger').show()
             } else if (res === '跳过') {
                 tbodyTr.hide();
                 tbodyTr.has('button').has('.' + cls + '').has('.text-info').show()
@@ -426,7 +432,15 @@
                 name: '测试结果',
                 type: 'gauge',
                 detail: {formatter: '{{pass_rate}}%'},
-                data: [{value: '{{pass_rate}}', name: '用例通过率'}]
+                data: [{value: '{{pass_rate}}', name: '用例通过率'}],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']]
+                    }
+                }
             }
         ]
     };
